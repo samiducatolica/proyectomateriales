@@ -1,2 +1,5 @@
 com/co/ucatolica/proyecto/ProyectoApplication.class
-com/co/ucatolica/proyecto/ServletInitializer.class
+com/co/ucatolica/proyecto/infraestructure/config/LugarRuta.class
+com/co/ucatolica/proyecto/application/UsuarioInterface.class
+com/co/ucatolica/proyecto/infraestructure/config/Usuario.class
+com/co/ucatolica/proyecto/domain/Temporal.class
