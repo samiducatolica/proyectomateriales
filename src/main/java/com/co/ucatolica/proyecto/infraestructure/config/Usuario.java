@@ -11,9 +11,6 @@ import jakarta.persistence.*;
  * @author samid
  */
 @Entity(name = "usuario")
-@Table(
-        
-)
 public class Usuario {
     @Id
     @SequenceGenerator(
