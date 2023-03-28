@@ -16,4 +16,5 @@ import org.springframework.data.jpa.repository.Query;
 public interface LugarRutaInterface extends JpaRepository<LugarRuta, Long>{
     @Query("SELECT l FROM lugarRuta l WHERE l.lugar = ?1")
     Optional<LugarRuta>findLugarByLugar(String lugar);
+    
 }

@@ -4,7 +4,16 @@
  */
 package com.co.ucatolica.proyecto.infraestructure.config;
 
+import com.co.ucatolica.proyecto.application.LugarRutaInterface;
 import jakarta.persistence.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.FluentQuery;
 
 
 /**
@@ -19,6 +28,7 @@ import jakarta.persistence.*;
         }
 )
 public class LugarRuta {
+    LugarRutaInterface iLugarRuta;
     @Id
     
     @SequenceGenerator(
@@ -70,7 +80,10 @@ public class LugarRuta {
     public LugarRuta() {
     }
 
-    
+    public LugarRuta(String lugar) {
+        this.lugar = lugar;
+    }
+
     @Override
     public String toString() {
         return "LugarRuta{" + "id=" + id + ", lugar=" + lugar + ", descripcion=" + descripcion + ", ubicacion=" + ubicacion + ", bloquear=" + bloquear + '}';
@@ -146,5 +159,33 @@ public class LugarRuta {
         this.bloquear = bloquear;
     }
     
+    public boolean existeLugar(String lugar){
+        return iLugarRuta.findLugarByLugar(lugar).isEmpty();
+    }
     
+    public void guardarLugar(LugarRuta luRu){
+        if(this.existeLugar(luRu.lugar)){
+            System.out.println("Ya existe un lugar registrado en el sistema.");
+        }else{
+            iLugarRuta.save(luRu);
+            System.out.println("Lugar guardado con exito.");
+        }
+    }
+    
+    public void consultarLugar(LugarRuta luRu){
+        if(this.existeLugar(luRu.lugar)){
+            System.out.println(iLugarRuta.findLugarByLugar(luRu.lugar));
+        }else{
+            System.out.println("No existe el lugar solicitado");
+        }
+    }
+    
+    public void borrarLugar(LugarRuta luRu){
+        if(this.existeLugar(luRu.lugar)){
+           luRu.setBloquear(true);
+           iLugarRuta.save(luRu);
+        }else{
+            System.out.println("No existe el lugar solicitado");
+        }
+    }
 }
